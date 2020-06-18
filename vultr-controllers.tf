@@ -55,28 +55,28 @@ resource "null_resource" "cluster_init" {
     destination = "~/vultr/ccm-api-key.yml"
   }
 
-  provisioner "file" {
-    content     = templatefile("${path.module}/templates/vultr/csi-api-key.yml.tpl", { CLUSTER_API_KEY = var.cluster_api_key }) 
-    destination = "~/vultr/csi-api-key.yml"
-  }
+  # provisioner "file" {
+  #   content     = templatefile("${path.module}/templates/vultr/csi-api-key.yml.tpl", { CLUSTER_API_KEY = var.cluster_api_key }) 
+  #   destination = "~/vultr/csi-api-key.yml"
+  # }
 
   provisioner "file" {
     content     = data.http.vultr_ccm_file.body
     destination = "~/vultr/vultr-ccm.yml" 
   }
 
-  provisioner "file" {
-    content     = data.http.vultr_csi_file.body
-    destination = "~/vultr/vultr-csi.yml" 
-  }
+  # provisioner "file" {
+  #   content     = data.http.vultr_csi_file.body
+  #   destination = "~/vultr/vultr-csi.yml" 
+  # }
 
   provisioner "remote-exec" {
     inline = [
       "kubectl apply -f ${var.cluster_cni}",
       "kubectl apply -f ~/vultr/ccm-api-key.yml",
-      "kubectl apply -f ~/vultr/csi-api-key.yml",
+      # "kubectl apply -f ~/vultr/csi-api-key.yml",
       "kubectl apply -f ~/vultr/vultr-ccm.yml",
-      "kubectl apply -f ~/vultr/vultr-csi.yml",
+      # "kubectl apply -f ~/vultr/vultr-csi.yml",
     ]
   }
 }

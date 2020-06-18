@@ -3,10 +3,10 @@ variable "vultr_ccm_release" {
   default = "latest"
 }
 
-variable "vultr_csi_release" {
-  type    = string
-  default = "latest"
-}
+# variable "vultr_csi_release" {
+#   type    = string
+#   default = "latest"
+# }
 
 variable "cluster_api_key" {
   type = string
