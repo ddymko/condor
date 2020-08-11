@@ -71,7 +71,7 @@ install_k8(){
 	apt-mark hold kubelet kubeadm kubectl
 
 	cat <<-EOF > /etc/default/kubelet
-		KUBELET_EXTRA_ARGS="--cloud-provider=external"
+		KUBELET_EXTRA_ARGS="--cloud-provider=external --register-node=false"
 		EOF
 }
 
